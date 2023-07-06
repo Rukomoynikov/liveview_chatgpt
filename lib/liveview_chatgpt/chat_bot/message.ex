@@ -3,7 +3,6 @@ defmodule LiveviewChatgpt.ChatBot.Message do
   import Ecto.Changeset
 
   schema "chatbot_messages" do
-    field :conversation_id, :id
     field :role, :string
     field :content, :string
 
