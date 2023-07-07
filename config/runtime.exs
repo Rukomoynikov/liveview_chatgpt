@@ -20,6 +20,8 @@ if System.get_env("PHX_SERVER") do
   config :liveview_chatgpt, LiveviewChatgptWeb.Endpoint, server: true
 end
 
+config :liveview_chatgpt, :open_ai_api_key, System.get_env("OPEN_AI_KEY")
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
