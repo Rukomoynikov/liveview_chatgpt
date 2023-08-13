@@ -7,6 +7,15 @@ defmodule LiveviewChatgpt.Chatbot do
   alias LiveviewChatgpt.Repo
 
   alias LiveviewChatgpt.ChatBot.{Conversation, Message}
+  alias LiveviewChatgpt.ChatBot.OpenAiService
+
+  def generate_response(conversation, messages) do
+    last_five_messages =
+      Enum.slice(messages, 0..4)
+      |> Enum.reverse()
+
+    create_message(conversation, OpenAiService.call(last_five_messages))
+  end
 
   def list_conversations do
     Repo.all(Conversation)
@@ -33,5 +42,10 @@ defmodule LiveviewChatgpt.Chatbot do
 
   def change_message(%Message{} = message, attrs \\ %{}) do
     Message.changeset(message, attrs)
+  end
+
+  def list_conversation_messages(conversation) do
+    from(m in Message, where: m.conversation_id == ^conversation.id)
+    |> Repo.all()
   end
 end
