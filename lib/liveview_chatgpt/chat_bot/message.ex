@@ -1,4 +1,6 @@
 defmodule LiveviewChatgpt.ChatBot.Message do
+  @derive {Jason.Encoder, only: [:role, :content]}
+
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -14,7 +16,7 @@ defmodule LiveviewChatgpt.ChatBot.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:role, :content])
+    |> validate_required([:role, :content])
   end
 end

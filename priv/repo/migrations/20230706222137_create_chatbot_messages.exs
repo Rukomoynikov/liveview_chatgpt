@@ -4,7 +4,7 @@ defmodule LiveviewChatgpt.Repo.Migrations.CreateChatbotMessages do
   def change do
     create table(:chatbot_messages) do
       add :conversation_id, references(:chatbot_conversations, on_delete: :nothing)
-      add :content, :string
+      add :content, :text
       add :role, :string
 
       timestamps()
